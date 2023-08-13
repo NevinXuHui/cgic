@@ -1,0 +1,45 @@
+---
+
+mindmap-plugin: basic
+
+---
+# Obsidian快捷键规划
+- 基础操作
+	- 对选中的文字查询及切换库：win+1/2（Autohotkey脚本）
+	- 切换编辑视图/阅读视图：ctrl+e
+	- 跳转到日记：alt+`
+	- 使用默认应用打开：alt+w
+	- 将焦点切换至编辑区：alt+e
+	- 文件列表：显示文件列表：alt+t
+	- Omnisearch: Vault search：alt+f
+	- 在所有文件中搜索：alt+shift+f
+	- 页面聚焦全屏：alt+g
+	- 收起侧边栏：ctrl+/
+	- 工作区：加载工作区布局：alt+x
+	- 保存当前布局后加载其他工作区：alt+shift+x
+	- 从模板创建文档：ctrl+shift+n
+	- Enhancing Mindmap：切换为markdown或mindmap模式：alt+m，复制为alt+c，粘贴为alt+v
+	- 在当前笔记中查找：ctrl+f
+	- 在当前笔记中查找并替换：ctrl+h
+	- 打开命令面板：ctrl+p
+	- 闪念笔记：alt+q
+	- 在一个新的选项卡中打开：ctrl+click
+	- 并排显示新窗格打开：ctrl+alt+click（图谱、链接面板……）
+	- 在新窗口中打开：ctrl+alt+shift+click
+- 格式化
+	- 高亮：alt+a
+	- Html 链接：alt+i
+	- 加入文件链接：alt+s
+	- 打开/隐藏悬浮工具栏：alt+r
+	- 粘贴表格：alt+b（从Excel等复制的内容）
+- 移动
+	- 聚焦：alt+1
+	- 退出聚焦：alt+2
+	- 回退：alt+left
+	- 前进：alt+right
+	- 上下拆分：alt+up
+	- 左右拆分：alt+down
+- 其它
+	- Recovery-diff-文档版本历史：ctrl+q
+	- Remote Save:开始同步：ctrl+r
+	- 详细参考：[[Obsidian 快捷键一览表]]

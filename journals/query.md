@@ -1,0 +1,2 @@
+202202161135471 检索测试 [{"type":"TAG","value":{"operator":"CONTAIN","value":"400兴趣类"},"relation":"AND"}]
+202206201914142 时间检索 [{"type":"DATE","value":{"operator":"CONTAIN","value":"2022/06/01"},"relation":"AND"},{"type":"DATE","value":{"operator":"NOT_CONTAIN","value":"2022/06/30"},"relation":"AND"}]
