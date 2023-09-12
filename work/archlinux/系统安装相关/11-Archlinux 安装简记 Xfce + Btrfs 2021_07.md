@@ -1,4 +1,7 @@
 ---
+banner: "https://picx.zhimg.com/v2-74db36256161ffc8b88b9249f52be13b_720w.jpg?source=172ae18b"
+---
+---
 url: https://zhuanlan.zhihu.com/p/388400709
 title: Archlinux 安装简记 Xfce + Btrfs 2021_07
 date: 2023-04-20 08:49:39

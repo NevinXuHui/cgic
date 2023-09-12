@@ -1,4 +1,7 @@
 ---
+banner: "undefined"
+---
+---
 url: https://www.cnblogs.com/futuretea/p/11995606.html
 title: 如何快速查看 archlinux pacman 软件记录？
 date: 2023-04-20 23:10:34

@@ -1,4 +1,7 @@
 ---
+banner: "https://k-2.space/images/AVT256.jpg"
+---
+---
 url: https://k-2.space/2018/04/install-and-configure-of-tftp-server-on-arch-linux/
 title: Install and configure of tftp server on Arch Linux
 date: 2023-05-09 21:55:53

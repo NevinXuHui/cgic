@@ -1,4 +1,7 @@
 ---
+banner: "undefined"
+---
+---
 url: https://zhuanlan.zhihu.com/p/513859236
 title: 2022_5 archlinux 详细安装过程
 date: 2023-04-20 08:49:28
