@@ -1,4 +1,7 @@
 ---
+banner: "undefined"
+---
+---
 url: https://zhuanlan.zhihu.com/p/383694450
 title: pacman 命令详解 (复制于 linux 命令大全）
 date: 2023-04-17 12:31:32

@@ -88,3 +88,22 @@ export no_proxy="localhost, 127.0.0.1"
 
 ##  最最最最重要  
 重启  
+
+
+##   关闭
+
+```
+systemctl stop  clash
+```
+
+
+```
+unset http_porxy
+```
+
+
+```
+  unset https_porxy
+```
+
+浏览器关闭代理设置
