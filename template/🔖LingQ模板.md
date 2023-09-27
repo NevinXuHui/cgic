@@ -15,12 +15,7 @@ I appreciate your president having made me an honorary visiting professor, and I
 string and string theory is good. setup xxx
 
 ^^^words
-+ **brief** : 短暂的
-+ **delighted** : 高兴的
-+ **honorary** : 义务的
-+ **occasion** : 时刻
-+ **setup** : 引子
-+ **theory** : 理论
+
 
 ^^^notes
 

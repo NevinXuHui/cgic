@@ -18,7 +18,11 @@ d035ab452682ac6b817eaed55c3e8a2a5401d51d
 
 一、在本地退回到到相应版本
 
-git reset --hard <版本号> // 注意使用 --hard 参数会抛弃当前工作区的修改 // 使用 --soft 参数的话会回退到之前的版本，但是保留当前工作区的修改，可以重新提交
+
+```
+git reset --hard <版本号>
+```
+ // 注意使用 --hard 参数会抛弃当前工作区的修改 // 使用 --soft 参数的话会回退到之前的版本，但是保留当前工作区的修改，可以重新提交
 
 来自 <[https://www.cnblogs.com/Mr-Rshare/p/15904622.html](https://www.cnblogs.com/Mr-Rshare/p/15904622.html)>
 

@@ -25,25 +25,22 @@ man systemd.unit
 nginx.service
 
 ```
-vim /user/lib/systemd/system/npc.service
-```
-
+[root@master ~]# vim /user/lib/systemd/system/nginx.service
 [Unit]
-
-```
-Description=npc
-Documentation=
-After=network.target
+Description=nginx - high performance web server
+Documentation=http://nginx.org/en/docs/
+After=network.target remote-fs.target nss-lookup.target
 [Service]
 Type=forking
-PIDFile=
-ExecStartPre=
-ExecStart=/mine/code/npc/npc -server=121.5.141.199:8024 -vkey=cdfx47kitpjn1zz1 -type=tcp
-ExecReload=
-ExecStop=
+PIDFile=/run/nginx.pid
+ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/nginx.conf
+ExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.conf
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
 PrivateTmp=true
 [Install]
 WantedBy=multi-user.target
+
 ```
 
 ##### 2. 示例 2

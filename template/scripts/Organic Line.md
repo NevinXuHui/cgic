@@ -1,3 +1,13 @@
+<!--
+ * @Author: NevinXuHui 18867103881@139.com
+ * @Date: 2023-08-29 08:36:43
+ * @LastEditors: NevinXuHui 18867103881@139.com
+ * @LastEditTime: 2023-08-29 08:48:03
+ * @FilePath: \obsidian\template\scripts\Organic Line.md
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by NevinXu, All Rights Reserved. 
+-->
 /*
 ![](https://raw.githubusercontent.com/zsviczian/obsidian-excalidraw-plugin/master/images/scripts-organic-line.jpg)
 

@@ -1,7 +1,4 @@
 ---
-banner: "https://picx.zhimg.com/v2-0b0904ae3d74e1976ca017c7c68eb3b3_720w.jpg?source=172ae18b"
----
----
 url: https://zhuanlan.zhihu.com/p/112536524
 title: 从零开始配置自己的 Arch Linux 桌面（极简）
 date: 2023-04-20 08:49:16

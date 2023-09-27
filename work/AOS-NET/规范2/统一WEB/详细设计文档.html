@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+      <html>
+      <head>
+      <title>路由器统一web页面</title>
+      <meta charset="utf-8" />
+      <style>@charset "UTF-8";
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* 外层轨道 */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset006pxrgba(255, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  font-size: 13px;
+  line-height: 25px;
+  color: #393838;
+  position: relative;
+}
+
+table {
+  margin: 10px 0 15px 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 3px 10px;
+}
+
+th {
+  padding: 5px 10px;
+}
+
+a, a:link, a:visited {
+  color: #34495e;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #59d69d;
+  text-decoration: none;
+}
+
+a img {
+  border: none;
+}
+
+p {
+  padding-left: 10px;
+  margin-bottom: 9px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #404040;
+  line-height: 36px;
+}
+
+h1 {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  line-height: 50px;
+}
+
+h2 {
+  font-size: 28px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+h3 {
+  clear: both;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-left: 3px solid #59d69d;
+  padding-left: 8px;
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 13px;
+}
+
+hr {
+  margin: 0 0 19px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+blockquote {
+  padding: 13px 13px 21px 15px;
+  margin-bottom: 18px;
+  font-family: georgia, serif;
+  font-style: italic;
+}
+
+blockquote:before {
+  font-size: 40px;
+  margin-left: -10px;
+  font-family: georgia, serif;
+  color: #eee;
+}
+
+blockquote p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+code,
+pre {
+  font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+
+code {
+  background-color: #fee9cc;
+  color: rgba(0, 0, 0, 0.75);
+  padding: 1px 3px;
+  font-size: 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+pre {
+  display: block;
+  padding: 14px;
+  margin: 0 0 18px;
+  line-height: 16px;
+  font-size: 11px;
+  border: 1px solid #d9d9d9;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #f6f6f6;
+}
+
+pre code {
+  background-color: #f6f6f6;
+  color: #737373;
+  font-size: 11px;
+  padding: 0;
+}
+
+sup {
+  font-size: 0.83em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+* {
+  -webkit-print-color-adjust: exact;
+}
+
+@media print {
+  body,
+  code,
+  pre code,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: black;
+  }
+
+  table,
+  pre {
+    page-break-inside: avoid;
+  }
+}
+html,
+body {
+  height: 100%;
+}
+
+.table-of-contents {
+  position: fixed;
+  top: 61px;
+  left: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 260px;
+}
+
+.table-of-contents > ul > li > a {
+  font-size: 20px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.table-of-contents ul {
+  overflow: auto;
+  margin: 0px;
+  height: 100%;
+  padding: 0px 0px;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+.table-of-contents ul li {
+  padding-left: 20px;
+}
+
+.table-of-contents a {
+  padding: 2px 0px;
+  display: block;
+  text-decoration: none;
+}
+
+.content-right {
+  max-width: 700px;
+  margin-left: 290px;
+  padding-left: 70px;
+  flex-grow: 1;
+}
+.content-right h2:target {
+  padding-top: 80px;
+}
+
+body > p {
+  margin-left: 30px;
+}
+
+body > table {
+  margin-left: 30px;
+}
+
+body > pre {
+  margin-left: 30px;
+}
+
+.curProject {
+  position: fixed;
+  top: 20px;
+  font-size: 25px;
+  color: black;
+  margin-left: -240px;
+  width: 240px;
+  padding: 5px;
+  line-height: 25px;
+  box-sizing: border-box;
+}
+
+.g-doc {
+  margin-top: 56px;
+  padding-top: 24px;
+  display: flex;
+}
+
+.curproject-name {
+  font-size: 42px;
+}
+
+.m-header {
+  background: #32363a;
+  height: 56px;
+  line-height: 56px;
+  padding-left: 60px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.m-header .title {
+  font-size: 22px;
+  color: #fff;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  margin-left: 16px;
+  padding: 0;
+  line-height: 56px;
+  border: none;
+}
+.m-header .nav {
+  color: #fff;
+  font-size: 16px;
+  position: absolute;
+  right: 32px;
+  top: 0;
+}
+.m-header .nav a {
+  color: #fff;
+  margin-left: 16px;
+  padding: 8px;
+  transition: color .2s;
+}
+.m-header .nav a:hover {
+  color: #59d69d;
+}
+
+.m-footer {
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/*# sourceMappingURL=defaultTheme.css.map */
+</style>
+      </head>
+      <body>
+        <div class="m-header">
+          <a href="#" style="display: inherit;"><svg class="svg" width="32px" height="32px" viewBox="0 0 64 64" version="1.1"><title>Icon</title><desc>Created with Sketch.</desc><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1"><stop stop-color="#FFFFFF" offset="0%"></stop><stop stop-color="#F2F2F2" offset="100%"></stop></linearGradient><circle id="path-2" cx="31.9988602" cy="31.9988602" r="2.92886048"></circle><filter x="-85.4%" y="-68.3%" width="270.7%" height="270.7%" filterUnits="objectBoundingBox" id="filter-3"><feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset><feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur><feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.159703351 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix></filter></defs><g id="首页" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="大屏幕"><g id="Icon"><circle id="Oval-1" fill="url(#linearGradient-1)" cx="32" cy="32" r="32"></circle><path d="M36.7078009,31.8054514 L36.7078009,51.7110548 C36.7078009,54.2844537 34.6258634,56.3695395 32.0579205,56.3695395 C29.4899777,56.3695395 27.4099998,54.0704461 27.4099998,51.7941246 L27.4099998,31.8061972 C27.4099998,29.528395 29.4909575,27.218453 32.0589004,27.230043 C34.6268432,27.241633 36.7078009,29.528395 36.7078009,31.8054514 Z" id="blue" fill="#2359F1" fill-rule="nonzero"></path><path d="M45.2586091,17.1026914 C45.2586091,17.1026914 45.5657231,34.0524383 45.2345291,37.01141 C44.9033351,39.9703817 43.1767091,41.6667796 40.6088126,41.6667796 C38.040916,41.6667796 35.9609757,39.3676862 35.9609757,37.0913646 L35.9609757,17.1034372 C35.9609757,14.825635 38.0418959,12.515693 40.6097924,12.527283 C43.177689,12.538873 45.2586091,14.825635 45.2586091,17.1026914 Z" id="green" fill="#57CF27" fill-rule="nonzero" transform="translate(40.674608, 27.097010) rotate(60.000000) translate(-40.674608, -27.097010) "></path><path d="M28.0410158,17.0465598 L28.0410158,36.9521632 C28.0410158,39.525562 25.9591158,41.6106479 23.3912193,41.6106479 C20.8233227,41.6106479 18.7433824,39.3115545 18.7433824,37.035233 L18.7433824,17.0473055 C18.7433824,14.7695034 20.8243026,12.4595614 23.3921991,12.4711513 C25.9600956,12.4827413 28.0410158,14.7695034 28.0410158,17.0465598 Z" id="red" fill="#FF561B" fill-rule="nonzero" transform="translate(23.392199, 27.040878) rotate(-60.000000) translate(-23.392199, -27.040878) "></path><g id="inner-round"><use fill="black" fill-opacity="1" filter="url(#filter-3)" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path-2"></use><use fill="#F7F7F7" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path-2"></use></g></g></g></g></svg></a>
+          <a href="#"><h1 class="title">YAPI 接口文档</h1></a>
+          <div class="nav">
+            <a href="https://hellosean1025.github.io/yapi/">YApi</a>
+          </div>
+        </div>
+        <div class="g-doc">
+          <div class="table-of-contents"><ul><li><a href="#u516cu5171u5206u7c7b">公共分类</a><ul><li><a href="#31u83b7u53d6u8defu7531u5668u662fu5426u8054u7f510a3ca20id3d31u83b7u53d6u8defu7531u5668u662fu5426u8054u7f513e203ca3e">3.1获取路由器是否联网
+<a id=3.1获取路由器是否联网> </a></a></li><li><a href="#32u83b7u53d6u7ec4u7f51u8bbeu5907u57fau672cu4fe1u606f0a3ca20id3d32u83b7u53d6u7ec4u7f51u8bbeu5907u57fau672cu4fe1u606f3e203ca3e">3.2获取组网设备基本信息
+<a id=3.2获取组网设备基本信息> </a></a></li><li><a href="#3309u83b7u53d6u7ec4u7f51u8bbeu5907u786cu4ef6u4fe1u606f0a3ca20id3d3309u83b7u53d6u7ec4u7f51u8bbeu5907u786cu4ef6u4fe1u606f3e203ca3e">3.3	获取组网设备硬件信息
+<a id=3.3	获取组网设备硬件信息> </a></a></li><li><a href="#3409u83b7u53d6u7ec4u7f51u8bbeu5907u7aefu53e3u4fe1u606f0a3ca20id3d3409u83b7u53d6u7ec4u7f51u8bbeu5907u7aefu53e3u4fe1u606f3e203ca3e">3.4	获取组网设备端口信息
+<a id=3.4	获取组网设备端口信息> </a></a></li><li><a href="#3509u83b7u53d6u7ec4u7f51u8bbeu5907u4e0au884cu4fe1u606f0a3ca20id3d3509u83b7u53d6u7ec4u7f51u8bbeu5907u4e0au884cu4fe1u606f3e203ca3e">3.5	获取组网设备上行信息
+<a id=3.5	获取组网设备上行信息> </a></a></li><li><a href="#3609u914du7f6epppoeu8d26u53f7u5bc6u78010a3ca20id3d3609u914du7f6epppoeu8d26u53f7u5bc6u78013e203ca3e">3.6	配置pppoe账号密码
+<a id=3.6	配置pppoe账号密码> </a></a></li><li><a href="#3709u914du7f6ewlanu4e0au884cu63a5u5165ssidu548cu5bc6u78010a3ca20id3d3709u914du7f6ewlanu4e0au884cu63a5u5165ssidu548cu5bc6u78013e203ca3e">3.7	配置wlan上行接入ssid和密码
+<a id=3.7	配置wlan上行接入ssid和密码> </a></a></li><li><a href="#3809u914du7f6eu7ec4u7f51u8bbeu5907u5de5u4f5cu6a21u5f0fu548cu4e0au7f51u7c7bu578b0a3ca20id3d3809u914du7f6eu7ec4u7f51u8bbeu5907u5de5u4f5cu6a21u5f0fu548cu4e0au7f51u7c7bu578b3e203ca3e">3.8	配置组网设备工作模式和上网类型
+<a id=3.8	配置组网设备工作模式和上网类型> </a></a></li><li><a href="#3909u83b7u53d6u4e0bu6302u8bbeu5907u5217u8868u4fe1u606f0a3ca20id3d3909u83b7u53d6u4e0bu6302u8bbeu5907u5217u8868u4fe1u606f3e203ca3e">3.9	获取下挂设备列表信息
+<a id=3.9	获取下挂设备列表信息> </a></a></li><li><a href="#31009u83b7u53d6u4e0bu6302u8bbeu5907u6570u91cfu4fe1u606f0a3ca20id3d31009u83b7u53d6u4e0bu6302u8bbeu5907u6570u91cfu4fe1u606f3e203ca3e">3.10	获取下挂设备数量信息
+<a id=3.10	获取下挂设备数量信息> </a></a></li><li><a href="#31109u83b7u53d6wifiu914du7f6eu4fe1u606f0a3ca20id3d31109u83b7u53d6wifiu914du7f6eu4fe1u606f3e203ca3e">3.11	获取wifi配置信息
+<a id=3.11	获取wifi配置信息> </a></a></li><li><a href="#31209u914du7f6ewifiu53c2u65700a3ca20id3d31209u914du7f6ewifiu53c2u65703e203ca3e">3.12	配置wifi参数
+<a id=3.12	配置wifi参数> </a></a></li><li><a href="#31309u914du7f6ewifiu5f00u51730a3ca20id3d31309u914du7f6ewifiu5f00u51733e203ca3e">3.13	配置wifi开关
+<a id=3.13	配置wifi开关> </a></a></li><li><a href="#31409u914du7f6ewifiu5c04u9891u53c2u65700a3ca20id3d31409u914du7f6ewifiu5c04u9891u53c2u65703e203ca3e">3.14	配置wifi射频参数
+<a id=3.14	配置wifi射频参数> </a></a></li><li><a href="#31509u914du7f6ewps0a3ca20id3d31509u914du7f6ewps3e203ca3e">3.15	配置wps
+<a id=3.15	配置wps> </a></a></li><li><a href="#31609u914du7f6eu53ccu9891u5408u4e000a3ca20id3d31609u914du7f6eu53ccu9891u5408u4e003e203ca3e">3.16	配置双频合一
+<a id=3.16	配置双频合一> </a></a></li><li><a href="#31709u83b7u53d6u53ccu9891u5408u4e00u914du7f6e0a3ca20id3d31709u83b7u53d6u53ccu9891u5408u4e00u914du7f6e3e203ca3e">3.17	获取双频合一配置
+<a id=3.17	获取双频合一配置> </a></a></li><li><a href="#31809u83b7u53d6u6240u6709u5b9au65f6u5668u4efbu52a1u914du7f6eu4fe1u606f0a3ca20id3d31809u83b7u53d6u6240u6709u5b9au65f6u5668u4efbu52a1u914du7f6eu4fe1u606f3e203ca3e">3.18	获取所有定时器任务配置信息
+<a id=3.18	获取所有定时器任务配置信息> </a></a></li><li><a href="#31909u6dfbu52a0u548cu66f4u65b0u5b9au65f6u4efbu52a10a3ca20id3d31909u6dfbu52a0u548cu66f4u65b0u5b9au65f6u4efbu52a13e203ca3e">3.19	添加和更新定时任务
+<a id=3.19	添加和更新定时任务> </a></a></li><li><a href="#32009u5220u9664u5b9au65f6u4efbu52a10a3ca20id3d32009u5220u9664u5b9au65f6u4efbu52a13e203ca3e">3.20	删除定时任务
+<a id=3.20	删除定时任务> </a></a></li><li><a href="#32109u8bbeu7f6eu9ed1u767du540du53550a3ca20id3d32109u8bbeu7f6eu9ed1u767du540du53553e203ca3e">3.21	设置黑白名单
+<a id=3.21	设置黑白名单> </a></a></li><li><a href="#32209u83b7u53d6u9ed1u767du540du53550a3ca20id3d32209u83b7u53d6u9ed1u767du540du53553e203ca3e">3.22	获取黑白名单
+<a id=3.22	获取黑白名单> </a></a></li><li><a href="#32309u914du7f6eu6570u636eu4fddu5b580a3ca20id3d32309u914du7f6eu6570u636eu4fddu5b583e203ca3e">3.23	配置数据保存
+<a id=3.23	配置数据保存> </a></a></li><li><a href="#32409u914du7f6eu6570u636eu83b7u53d60a3ca20id3d32409u914du7f6eu6570u636eu83b7u53d63e203ca3e">3.24	配置数据获取
+<a id=3.24	配置数据获取> </a></a></li><li><a href="#32509u914du7f6eu6570u636eu5220u96640a3ca20id3d32509u914du7f6eu6570u636eu5220u96643e203ca3e">3.25	配置数据删除
+<a id=3.25	配置数据删除> </a></a></li><li><a href="#32809lanu4fa7u5730u5740u4fe1u606fu83b7u53d60a3ca20id3d32809lanu4fa7u5730u5740u4fe1u606fu83b7u53d63e203ca3e">3.28	Lan侧地址信息获取
+<a id=3.28	Lan侧地址信息获取> </a></a></li><li><a href="#32909lanu4fa7u5730u5740u4fe1u606fu914du7f6e0a3ca20id3d32909lanu4fa7u5730u5740u4fe1u606fu914du7f6e3e203ca3e">3.29	Lan侧地址信息配置
+<a id=3.29	Lan侧地址信息配置> </a></a></li><li><a href="#33009lanu4fa7u7ed1u5b9au8bbeu5907u72b6u6001u67e5u8be20a3ca20id3d33009lanu4fa7u7ed1u5b9au8bbeu5907u72b6u6001u67e5u8be23e203ca3e">3.30	Lan侧绑定设备状态查询
+<a id=3.30	Lan侧绑定设备状态查询> </a></a></li><li><a href="#33109lanu4fa7u7ed1u5b9au8bbeu5907u6dfbu52a0u548cu4feeu65390a3ca20id3d33109lanu4fa7u7ed1u5b9au8bbeu5907u6dfbu52a0u548cu4feeu65393e203ca3e">3.31	Lan侧绑定设备添加和修改
+<a id=3.31	Lan侧绑定设备添加和修改> </a></a></li><li><a href="#33209lanu4fa7u7ed1u5b9au8bbeu5907u5220u96640a3ca20id3d33209lanu4fa7u7ed1u5b9au8bbeu5907u5220u96643e203ca3e">3.32	Lan侧绑定设备删除
+<a id=3.32	Lan侧绑定设备删除> </a></a></li><li><a href="#33320u7ec4u7f51u8bbeu5907u5468u8fb9wifiu4fe1u606f0a3ca20id3d33320u7ec4u7f51u8bbeu5907u5468u8fb9wifiu4fe1u606f3e203ca3e">3.33 组网设备周边WIFI信息
+<a id=3.33 组网设备周边WIFI信息> </a></a></li></ul></li></ul></div>
+          <div id="right" class="content-right">
+           <h1 class="curproject-name"> 路由器统一web页面 </h1> 
+<h1 id="u516cu5171u5206u7c7b">公共分类</h1>
+<p></p>
+<h2 id="31u83b7u53d6u8defu7531u5668u662fu5426u8054u7f510a3ca20id3d31u83b7u53d6u8defu7531u5668u662fu5426u8054u7f513e203ca3e">3.1获取路由器是否联网
+<a id=3.1获取路由器是否联网> </a></h2>
+<p></p>
+<h3 id="">基本信息</h3>
+<p><strong>Path：</strong> /api/networkstatus</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-2">请求参数</h3>
+<h3 id="-3">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应数据</span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> status</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">联网状态： 1 联网   0  未联网</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="32u83b7u53d6u7ec4u7f51u8bbeu5907u57fau672cu4fe1u606f0a3ca20id3d32u83b7u53d6u7ec4u7f51u8bbeu5907u57fau672cu4fe1u606f3e203ca3e">3.2获取组网设备基本信息
+<a id=3.2获取组网设备基本信息> </a></h2>
+<p></p>
+<h3 id="-4">基本信息</h3>
+<p><strong>Path：</strong> /api/devbasicinfo</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-5">请求参数</h3>
+<h3 id="-6">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应数据</span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> productToken</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备在开发者门户注册的产品类型Token</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> deviceType</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">家庭终端的产品类型，数字家庭合作伙伴门户申请</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> deviceVendor</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网终端的设备厂商编码，数字家庭合作伙伴门户申请</span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> deviceModel</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网终端的产品型号编码，数字家庭合作伙伴门户申请</span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> deviceSn</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网终端的序列号，序列号格式要求见《中国移动家庭智能组网终端技术规范》</span></td><td key=5></td></tr><tr key=0-2-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ponSn</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">PON序列号，光网关终端必选，按网关技术规范要求生成</span></td><td key=5></td></tr><tr key=0-2-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cmei</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网终端唯一标识</span></td><td key=5></td></tr><tr key=0-2-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> softwareVersion</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网固件版本</span></td><td key=5></td></tr><tr key=0-2-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> hardwareVersion</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网硬件版本</span></td><td key=5></td></tr><tr key=0-2-9><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ahsapdVersion</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">ahsapd版本</span></td><td key=5></td></tr><tr key=0-2-10><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> authId</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备认证唯一标识，数字家庭合作伙伴门户申请,一机一密必选</span></td><td key=5></td></tr><tr key=0-2-11><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> devKey</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备密钥，一机一密必选</span></td><td key=5></td></tr><tr key=0-2-12><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> dmKey</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">终端公司key(可选,预留接口)</span></td><td key=5></td></tr><tr key=0-2-13><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> powerSupplyMode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">供电方式（枚举值）： 1：电池供电 2：POE供电 3: 市电供电 4：USB供电 5：其它供电</span></td><td key=5></td></tr><tr key=0-2-14><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> provinceCode</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备预置省份码</span></td><td key=5></td></tr><tr key=0-2-15><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> captureEth</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备网口名，用于数据抓包监测</span></td><td key=5></td></tr><tr key=0-2-16><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> deviceMac</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网终端Mac地址，格式大写去掉冒号</span></td><td key=5></td></tr><tr key=0-2-17><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网终端ip，非ip终端则为空</span></td><td key=5></td></tr><tr key=0-2-18><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6IPAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网终端IPv6地址</span></td><td key=5></td></tr><tr key=0-2-19><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> meshType</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">0：非mesh终端 1：easyMesh， 2：其它mesh</span></td><td key=5></td></tr><tr key=0-2-20><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> meshRole</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">0：非mesh终端 1：controller 2：agent 3：AC 4:  AP</span></td><td key=5></td></tr><tr key=0-2-21><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> uplinkType</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行接入方式：WLAN、Ethernet、PLC、Cable、Optical Ethernet、GPON、XGPON、XGSPON、PoE</span></td><td key=5></td></tr><tr key=0-2-22><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> workingMode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备工作模式， 0: 桥接模式 1：路由模式 2：中继模式</span></td><td key=5></td></tr><tr key=0-2-23><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> radio5</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">支持频段： 0：单频 1：双频 2：三频 3：无WI-FI终端</span></td><td key=5></td></tr><tr key=0-2-24><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> pppoeUser</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">pppoe宽带账号,pppoe拨号是必选，非拨号时值为空</span></td><td key=5></td></tr><tr key=0-2-25><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> reserve</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">厂商特殊标识字段,预留可选</span></td><td key=5></td></tr><tr key=0-2-26><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> wifiSpecifications</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">wifi的无线规格采用枚举值 1：AC1200（空间流：2.4G：2 x 2， 5G： 2 x 2） 2：AC1900（空间流：2.4G：3 x 3， 5G： 3 x 3） 3：AC2100 （空间流：2.4G：2 x 2， 5G： 4 x4） 4：AC2100 （空间流：2.4G：2 x 2， 5G： 2 x2） 5：AC2600 （空间流：2.4G：4 x 4， 5G： 4 x4） 6：AX1500 （空间流：2.4G：2 x 2， 5G： 2 x2） 7：AX1800 （空间流：2.4G：2 x 2， 5G： 2 x2） 8：AX3000 （空间流：2.4G：2 x 2， 5G： 2 x2） 9:  AX3000 （空间流：2.4G：2 x 2， 5G:4 x 4） 10: AX3600 （空间流：2.4G：4 x 4， 5G： 4 x 4） 11: AX5400 （空间流：2.4G：2 x 2， 5G： 4 x4） 12: AX6000（空间流：2.4G：4 x 4， 5G： 4 x4）</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="3309u83b7u53d6u7ec4u7f51u8bbeu5907u786cu4ef6u4fe1u606f0a3ca20id3d3309u83b7u53d6u7ec4u7f51u8bbeu5907u786cu4ef6u4fe1u606f3e203ca3e">3.3	获取组网设备硬件信息
+<a id=3.3	获取组网设备硬件信息> </a></h2>
+<p></p>
+<h3 id="-7">基本信息</h3>
+<p><strong>Path：</strong> /api/hardwareinfo</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-8">请求参数</h3>
+<h3 id="-9">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应数据</span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cpuType</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">智能组网终端CPU型号</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> flashSize</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Flash大小（单位：Mbytes）</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ramSize</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Ram大小（单位：Mbytes）</span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> cpuOccupancyRate</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">0-100（CPU占用率）</span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ramOccupancyRate</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">0-100（RAM占用率）</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="3409u83b7u53d6u7ec4u7f51u8bbeu5907u7aefu53e3u4fe1u606f0a3ca20id3d3409u83b7u53d6u7ec4u7f51u8bbeu5907u7aefu53e3u4fe1u606f3e203ca3e">3.4	获取组网设备端口信息
+<a id=3.4	获取组网设备端口信息> </a></h2>
+<p></p>
+<h3 id="-10">基本信息</h3>
+<p><strong>Path：</strong> /api/portinfo</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-11">请求参数</h3>
+<h3 id="-12">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应数据</span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> portInfoList</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">端口号信息的数组</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> index</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">端口index,从1开始</span></td><td key=5></td></tr><tr key=0-2-0-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> portType</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">端口类型:0 wan, 1 lan</span></td><td key=5></td></tr><tr key=0-2-0-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> portRate</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">端口协商速率（单位Mbps）</span></td><td key=5></td></tr><tr key=0-2-0-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> portMac</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">组网设备端口mac，格式大写去掉冒号</span></td><td key=5></td></tr><tr key=0-2-0-4><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> portConnection</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">端口连接情况: 0已连接 1未连接</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="3509u83b7u53d6u7ec4u7f51u8bbeu5907u4e0au884cu4fe1u606f0a3ca20id3d3509u83b7u53d6u7ec4u7f51u8bbeu5907u4e0au884cu4fe1u606f3e203ca3e">3.5	获取组网设备上行信息
+<a id=3.5	获取组网设备上行信息> </a></h2>
+<p></p>
+<h3 id="-13">基本信息</h3>
+<p><strong>Path：</strong> /api/uplinkinfo</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-14">请求参数</h3>
+<h3 id="-15">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> uplinkType</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">当前的上行接入方式： WLAN、Ethernet、PLC、Cable、Optical Etbernet 、GPON、XGPON、XGSPON、PoE</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> uplinkMac</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备上行mac，格式大写去掉冒号</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> gatewayMac</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备上行网元（网关）mac, 格式大写去掉冒号, 非PPPoE拨号时必选</span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> workingMode</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">AP工作模式： 0：桥接，默认 1：路由 2：中继</span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> internetType</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">AP上网方法： 0: dhcp (默认) 1: pppoe 2: static</span></td><td key=5></td></tr><tr key=0-2-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> pppoeUser</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">pppoe宽带账号,pppoe拨号是必选，非拨号时值为空</span></td><td key=5></td></tr><tr key=0-2-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> pppoePwd</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">pppoe密码 </span></td><td key=5></td></tr><tr key=0-2-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> runningTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备运行时长，时间单位S(秒)</span></td><td key=5></td></tr><tr key=0-2-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> radio</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN上联时使用的频段，取值2.4G或5G；设备工作于WLAN上联时，该字段必选；</span></td><td key=5></td></tr><tr key=0-2-9><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ssid</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN上联时接入的SSID名称；设备工作于WLAN上联时，该字段必选；</span></td><td key=5></td></tr><tr key=0-2-10><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> securityMode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">认证加密模式，枚举取值： None WEP-64 WEP-128 WPA-Personal WPA2-Personal MIXED-WPAPSK2 WPA3-SAE MIXED-WPA2WPA3</span></td><td key=5></td></tr><tr key=0-2-11><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> channel</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN上联时的工作信道号，如存在多信道，引用“,”逗号分隔，例：“1 ,6”；设备工作于WLAN上联时，该字段必选；</span></td><td key=5></td></tr><tr key=0-2-12><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> noise</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN上联时的噪声强度，单位dBm；设备工作于WLAN上联时，该字段必选；</span></td><td key=5></td></tr><tr key=0-2-13><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> snr</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN上联时的信噪比，单位dB；设备工作于WLAN上联时，该字段必选；</span></td><td key=5></td></tr><tr key=0-2-14><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rssi</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN上联时的上联信号强度，单位为dBm；设备工作于WLAN上联时，该字段必选；</span></td><td key=5></td></tr><tr key=0-2-15><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> fiberStatus</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">光口连接状态，采用枚举取值： 0：Up； 1：Initializing 2：EstablishingLink 3：NoSignal 4：Error 5：Disabled</span></td><td key=5></td></tr><tr key=0-2-16><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> fiberTXPower</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">光口上联时发射光功率，单位dBm；上行光接入时必选；</span></td><td key=5></td></tr><tr key=0-2-17><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> fiberRXPower</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">光口上联时接收光功率，单位dBm；上行光接入时必选；</span></td><td key=5></td></tr><tr key=0-2-18><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> transceiverTemperature</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">光模块的工作温度，单位：1/256摄氏度；</span></td><td key=5></td></tr><tr key=0-2-19><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> supplyVottage</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">光模块的供电电压，单位：100毫伏；</span></td><td key=5></td></tr><tr key=0-2-20><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> biasCurrent</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">光发送机的偏置电流，单位：2微安；</span></td><td key=5></td></tr><tr key=0-2-21><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> distance</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">对于光网关，该值为光网关和OLT之间的距离；单位：米； 对于关路由，该值为光路由与光网关之间的距离，单位：米；由光路由参考ITU规范的测距算法得出； 说明：该字段仅对P2MP的光路由做要求，P2P接入的光路由该值可为空；</span></td><td key=5></td></tr><tr key=0-2-22><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rxRate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行协商接收速率，单位Mbps</span></td><td key=5></td></tr><tr key=0-2-23><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> txRate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行协商发送速率，单位Mbps</span></td><td key=5></td></tr><tr key=0-2-24><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rxRate_rt</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行实时接收速率(Mbps)</span></td><td key=5></td></tr><tr key=0-2-25><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> txRate_rt</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行实时发送速率(Mbps)</span></td><td key=5></td></tr><tr key=0-2-26><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> totalBytesSent</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行总发送字节数</span></td><td key=5></td></tr><tr key=0-2-27><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> totalBytesReceived</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行总接收字节数</span></td><td key=5></td></tr><tr key=0-2-28><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> totalPacketsSent</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行总发送包数</span></td><td key=5></td></tr><tr key=0-2-29><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> totalPacketsReceived</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行总接收包数</span></td><td key=5></td></tr><tr key=0-2-30><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> errorsSent</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行发送错误包数</span></td><td key=5></td></tr><tr key=0-2-31><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> errorsReceived</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行接收错误包数</span></td><td key=5></td></tr><tr key=0-2-32><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> discardPacketsSen</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行发送丢失的包数</span></td><td key=5></td></tr><tr key=0-2-33><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> discardPacketsReceived</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">上行接收丢失的包数</span></td><td key=5></td></tr><tr key=0-2-34><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6ConnStatus</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">IPv6协议的连接状态，枚举取值： Connected Unconnected </span></td><td key=5></td></tr><tr key=0-2-35><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6IPAddressOrigin</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">IPv6地址分配机制，枚举取值： AutoConfigured DHCPv6  Static </span></td><td key=5></td></tr><tr key=0-2-36><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6IPAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WAN连接的IPv6地址；</span></td><td key=5></td></tr><tr key=0-2-37><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6DNSServers</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">DNS Server地址。</span></td><td key=5></td></tr><tr key=0-2-38><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6PrefixDelegationEnabled</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Prefix Delegation使能状态； 1:表示启用，0:表示禁用。</span></td><td key=5></td></tr><tr key=0-2-39><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6PrefixOrigin</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">前缀地址分配机制，枚举取值：  PrefixDelegation Static  </span></td><td key=5></td></tr><tr key=0-2-40><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6Prefix</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">前缀地址。</span></td><td key=5></td></tr><tr key=0-2-41><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6PrefixPltime</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">公告前缀的preferred lifetime，单位：秒 ；</span></td><td key=5></td></tr><tr key=0-2-42><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipv6PrefixVltime</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">公告前缀的valid lifetime，单位：秒 ；</span></td><td key=5></td></tr><tr key=0-2-43><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> defaultIPv6Gateway</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">IPv6默认网关 ；</span></td><td key=5></td></tr><tr key=0-2-44><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> dsliteEnable</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用DS-lite功能。 1: TRUE表示启用，0: FALSE表示禁用。 </span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="3609u914du7f6epppoeu8d26u53f7u5bc6u78010a3ca20id3d3609u914du7f6epppoeu8d26u53f7u5bc6u78013e203ca3e">3.6	配置pppoe账号密码
+<a id=3.6	配置pppoe账号密码> </a></h2>
+<p></p>
+<h3 id="-16">基本信息</h3>
+<p><strong>Path：</strong> /api/pppoeinfo</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-17">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> pppoeUser</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">pppoe宽带账号 </span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> pppoePwd</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">pppoe密码 </span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-18">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="3709u914du7f6ewlanu4e0au884cu63a5u5165ssidu548cu5bc6u78010a3ca20id3d3709u914du7f6ewlanu4e0au884cu63a5u5165ssidu548cu5bc6u78013e203ca3e">3.7	配置wlan上行接入ssid和密码
+<a id=3.7	配置wlan上行接入ssid和密码> </a></h2>
+<p></p>
+<h3 id="-19">基本信息</h3>
+<p><strong>Path：</strong> /api/wlanconnectinfo</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-20">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> ssid</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN上联时接入的SSID名称；设备工作于WLAN上联时，该字段必选；</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> pwd</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN上联时接入的SSID的密码，不应显示此参数</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> securityMode</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">认证加密模式，枚举取值： None WEP-64 WEP-128 WPA-Personal WPA2-Personal MIXED-WPAPSK2 WPA3-SAE MIXED-WPA2WPA3</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-21">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="3809u914du7f6eu7ec4u7f51u8bbeu5907u5de5u4f5cu6a21u5f0fu548cu4e0au7f51u7c7bu578b0a3ca20id3d3809u914du7f6eu7ec4u7f51u8bbeu5907u5de5u4f5cu6a21u5f0fu548cu4e0au7f51u7c7bu578b3e203ca3e">3.8	配置组网设备工作模式和上网类型
+<a id=3.8	配置组网设备工作模式和上网类型> </a></h2>
+<p></p>
+<h3 id="-22">基本信息</h3>
+<p><strong>Path：</strong> /api/workmode</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-23">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> workingMode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">AP工作模式： 0：桥接，默认 1：路由 2：中继</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> internetType</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">AP上网方法： 0: dhcp (默认) 1: pppoe 2: static</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-24">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="3909u83b7u53d6u4e0bu6302u8bbeu5907u5217u8868u4fe1u606f0a3ca20id3d3909u83b7u53d6u4e0bu6302u8bbeu5907u5217u8868u4fe1u606f3e203ca3e">3.9	获取下挂设备列表信息
+<a id=3.9	获取下挂设备列表信息> </a></h2>
+<p></p>
+<h3 id="-25">基本信息</h3>
+<p><strong>Path：</strong> /api/getstainfo</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-26">请求参数</h3>
+<h3 id="-27">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> staDevices</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">连接的下挂设备信息数组，下挂设备数非零时必选</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> radio</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN下挂设备的接入频段，取值2.4G或5G，5G-2，对非WLAN下挂设备应填空值；该字段在下挂设备数非零时必选 注：对于三频设备，5G表示5.8G频段，5G-2表示5.2G频段；双频设备忽略5G-2频段；</span></td><td key=5></td></tr><tr key=0-2-0-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> accessTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备接入时间，时间格式：2021-01-07 16:50:30 </span></td><td key=5></td></tr><tr key=0-2-0-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> upTime</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">已连接时间，单位：S(秒)；该字段在下挂设备数非零时必选</span></td><td key=5></td></tr><tr key=0-2-0-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> staType</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备类型（PC、Phone、TV、Router、IoT、IPC、others）；该字段在下挂设备数非零时必选</span></td><td key=5></td></tr><tr key=0-2-0-4><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> vmacAddress</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备在智能组网终端下的虚拟MAC，如果未转换，则和真实MAC一致。格式为不带冒号且大写；该字段在下挂设备数非零时必选</span></td><td key=5></td></tr><tr key=0-2-0-5><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> macAddress</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备MAC地址，格式为不带冒号且大写； 该字段在下挂设备数非零时必选</span></td><td key=5></td></tr><tr key=0-2-0-6><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> staVendor</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备归属厂商信息</span></td><td key=5></td></tr><tr key=0-2-0-7><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> hostName</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备的HostName；该字段在下挂设备数非零时必选</span></td><td key=5></td></tr><tr key=0-2-0-8><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> staIPv6IPAddress</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备的IPV6地址；该字段在下挂设备数非零，且支持IPv6时必选</span></td><td key=5></td></tr><tr key=0-2-0-9><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> ipAddress</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备的IPAddress；该字段在下挂设备数非零时必选</span></td><td key=5></td></tr><tr key=0-2-0-10><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> totalBytesSent</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备总发送字节数</span></td><td key=5></td></tr><tr key=0-2-0-11><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> txRate_rt</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">实时发送速率(Mbps) ； 该字段在下挂设备数非零时必选；</span></td><td key=5></td></tr><tr key=0-2-0-12><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> rxRate_rt</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">实时接收速率(Mbps)； 该字段在下挂设备数非零时必选；</span></td><td key=5></td></tr><tr key=0-2-0-13><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> txRate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备协商发送速率；该字段在下挂设备数非零时必选(Mbps)</span></td><td key=5></td></tr><tr key=0-2-0-14><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> rxRate</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备协商接收速率；该字段在下挂设备数非零时必选(Mbps)</span></td><td key=5></td></tr><tr key=0-2-0-15><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> channel</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN下挂设备当前的工作信道，单对非WLAN下挂设备应填空值；该字段在下挂设备数非零时必选</span></td><td key=5></td></tr><tr key=0-2-0-16><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> rssi</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN下挂设备当前的信号强度，单位为dBm，对非WLAN下挂设备应填空值；该字段在下挂设备数非零时必选</span></td><td key=5></td></tr><tr key=0-2-0-17><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> ssid</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WLAN下挂设备的接入SSID名称，非WLAN下挂设备应填空值； 该字段在下挂设备数非零时必选</span></td><td key=5></td></tr><tr key=0-2-0-18><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> totalPacketsReceived</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备总接收包数</span></td><td key=5></td></tr><tr key=0-2-0-19><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> totalPacketsSent</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备总发送包数</span></td><td key=5></td></tr><tr key=0-2-0-20><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> totalBytesReceived</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备总接收字节数</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31009u83b7u53d6u4e0bu6302u8bbeu5907u6570u91cfu4fe1u606f0a3ca20id3d31009u83b7u53d6u4e0bu6302u8bbeu5907u6570u91cfu4fe1u606f3e203ca3e">3.10	获取下挂设备数量信息
+<a id=3.10	获取下挂设备数量信息> </a></h2>
+<p></p>
+<h3 id="-28">基本信息</h3>
+<p><strong>Path：</strong> /api/stanum</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-29">请求参数</h3>
+<h3 id="-30">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应数据</span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> wire</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备的有线连接数量</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> 2.4G</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备通过wifi 2.4G连接数量</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> 5G</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">下挂设备通过wifi 5G 连接数量</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31109u83b7u53d6wifiu914du7f6eu4fe1u606f0a3ca20id3d31109u83b7u53d6wifiu914du7f6eu4fe1u606f3e203ca3e">3.11	获取wifi配置信息
+<a id=3.11	获取wifi配置信息> </a></h2>
+<p></p>
+<h3 id="-31">基本信息</h3>
+<p><strong>Path：</strong> /api/wifiinfo</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-32">请求参数</h3>
+<h3 id="-33">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应数据</span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> radios</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WiFi射频信息的数组； 包含以下字段：Radio，Enable，TransmitPower，ssidStandard,nosieLevel, interferencePercent ,Channel，bandwidth</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> radio</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Radios数组之一，频段，枚举取值： 2.4G 5G 5G-2 注：对于三频设备，5G表示5.8G频段，5G-2表示5.2G频段；双频设备忽略5G-2频段</span></td><td key=5></td></tr><tr key=0-2-0-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> enable</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Radios数组之一，该频段是否启用，1为启用，0为禁用</span></td><td key=5></td></tr><tr key=0-2-0-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> transmitPower</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Radios数组之一，WiFi发射功率级别（百分比）</span></td><td key=5></td></tr><tr key=0-2-0-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> ssidStandard</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">支持的无线传输标准，取值802.11a/802.11b/802.11g/802.11n/802.11ac/802.11ax等</span></td><td key=5></td></tr><tr key=0-2-0-4><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> noiseLevel</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">当前信道底噪</span></td><td key=5></td></tr><tr key=0-2-0-5><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> interferencePercent</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">当前信道干扰信号的占空比( 当前信道使用率（%），数据范围：0-100；) 说明：应包含自身数据收发和周边干扰之和；</span></td><td key=5></td></tr><tr key=0-2-0-6><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> channel</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Radios数组之一，当前工作信道号,若存在多个信道，可用“,”逗号分隔，例如：“1,6”</span></td><td key=5></td></tr><tr key=0-2-0-7><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> bandwidth</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">当前Wi-Fi频宽，采用枚举取值： 0：自动频宽 1：20MHz 2：40MHz 3：80MHz 4：160MHz 5：80+80MHz 说明：对于2.4G频段，自动频宽功能为20/40MHz频宽自适应；对于5G频段，自动频宽功能对应为20/40/80/160MHz频宽自适应</span></td><td key=5></td></tr><tr key=0-2-0-8><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> configurations</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WiFi信息的数组,包含 radio, index, enable, ssid, securityMode, encrypt,pwd, maxAssociateNum, ssidAdvertisementEnabled、wlanMa c</span></td><td key=5></td></tr><tr key=0-2-0-8-0><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> radio</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">频段，枚举取值： 2.4G 5G 5G-2 注：对于三频设备，5G表示5.8G频段，5G-2表示5.2G频段；双频设备忽略5G-2频段；</span></td><td key=5></td></tr><tr key=0-2-0-8-1><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> index</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">SSID的索引,2.4G:1-4,5G: 5-8,5G-2采用9-12；值为0时对指定radio的全局控制； 注：双频设备忽略5G-2频段；</span></td><td key=5></td></tr><tr key=0-2-0-8-2><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> enable</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用，1为启用，0为禁用</span></td><td key=5></td></tr><tr key=0-2-0-8-3><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> ssid</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">SSID名称</span></td><td key=5></td></tr><tr key=0-2-0-8-4><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> securityMode</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">认证加密模式，枚举取值： None WEP-64 WEP-128 WPA-Personal WPA2-Personal MIXED-WPAPSK2 WPA3-SAE MIXED-WPA2WPA3</span></td><td key=5></td></tr><tr key=0-2-0-8-5><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> encrypt</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">加密算法，枚举取值： 0：None: 1：AES 2：TKIP 3：AES+TKIP</span></td><td key=5></td></tr><tr key=0-2-0-8-6><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> pwd</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WiFi密钥，WEP Key或Pre-shared Key，管理平台不应存储和显示此参数。</span></td><td key=5></td></tr><tr key=0-2-0-8-7><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> wlanMac</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">每个SSID对应Mac地址，格式大写去掉冒号</span></td><td key=5></td></tr><tr key=0-2-0-8-8><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> maxAssociateNum</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">该SSID最大允许接入的用户数，0表示不限制</span></td><td key=5></td></tr><tr key=0-2-0-8-9><td key=0><span style="padding-left: 60px"><span style="color: #8c8a8a">├─</span> ssidAdvertisementEnabled</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否广播SSID，1为广播，0为不广播</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31209u914du7f6ewifiu53c2u65700a3ca20id3d31209u914du7f6ewifiu53c2u65703e203ca3e">3.12	配置wifi参数
+<a id=3.12	配置wifi参数> </a></h2>
+<p></p>
+<h3 id="-34">基本信息</h3>
+<p><strong>Path：</strong> /api/wifiparameter</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-35">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> configurations</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WiFi信息的数组,包含 radio, index, enable, ssid, securityMode, encrypt,pwd, maxAssociateNum, ssidAdvertisementEnabled、wlanMa c</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> radio</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">频段，枚举取值： 2.4G 5G 5G-2 注：对于三频设备，5G表示5.8G频段，5G-2表示5.2G频段；双频设备忽略5G-2频段；</span></td><td key=5></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> index</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">SSID的索引,2.4G:1-4,5G: 5-8,5G-2采用9-12；值为0时对指定radio的全局控制； 注：双频设备忽略5G-2频段；</span></td><td key=5></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> enable</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用，1为启用，0为禁用</span></td><td key=5></td></tr><tr key=0-0-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ssid</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">SSID名称</span></td><td key=5></td></tr><tr key=0-0-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> securityMode</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">认证加密模式，枚举取值： 0:None 1:WEP-64 128 2:WPA-Personal 3:WPA2-Personal 4:MIXED-WPAPSK2 5:WPA3-SAE 6:MIXEDWEP--WPA2WPA3</span></td><td key=5></td></tr><tr key=0-0-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> encrypt</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">加密算法，枚举取值： 0：None: 1：AES 2：TKIP 3：AES+TKIP</span></td><td key=5></td></tr><tr key=0-0-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> pwd</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">WiFi密钥，WEP Key或Pre-shared Key，管理平台不应存储和显示此参数。</span></td><td key=5></td></tr><tr key=0-0-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> maxAssociateNum</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">该SSID最大允许接入的用户数，0表示不限制，默认不限制</span></td><td key=5></td></tr><tr key=0-0-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ssidAdvertisementEnabled</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否广播SSID，1为广播，0为不广播，默认为广播</span></td><td key=5></td></tr><tr key=0-0-9><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ssidStandard</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"> 必须 支持的无线传输标准，取值802.11a/802.11b/802.11g/802.11n/802.11ac/802.11ax等</span></td><td key=5></td></tr><tr key=0-0-10><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> timeout</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">针对访客wifi进行开启时间的定时器设置，-1代表不开启，0代表长期开启，正数表示需要开启的时间，单位分钟</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-36">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31309u914du7f6ewifiu5f00u51730a3ca20id3d31309u914du7f6ewifiu5f00u51733e203ca3e">3.13	配置wifi开关
+<a id=3.13	配置wifi开关> </a></h2>
+<p></p>
+<h3 id="-37">基本信息</h3>
+<p><strong>Path：</strong> /api/wifiswitch</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-38">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> radio</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">频段，枚举取值： 2.4G 5G 5G-2 注：对于三频设备，5G表示5.8G频段，5G-2表示5.2G频段；双频设备忽略5G-2频段；</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> index</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">SSID的索引,2.4G:1-4,5G: 5-8,5G-2采用9-12；值为0时对指定radio的全局控制； 注：双频设备忽略5G-2频段；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> enable</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用，1为启用，0为禁用</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-39">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31409u914du7f6ewifiu5c04u9891u53c2u65700a3ca20id3d31409u914du7f6ewifiu5c04u9891u53c2u65703e203ca3e">3.14	配置wifi射频参数
+<a id=3.14	配置wifi射频参数> </a></h2>
+<p></p>
+<h3 id="-40">基本信息</h3>
+<p><strong>Path：</strong> /api/radioconfig</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-41">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> radio</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Radios数组之一，频段，枚举取值： 2.4G 5G 5G-2 注：对于三频设备，5G表示5.8G频段，5G-2表示5.2G频段；双频设备忽略5G-2频段</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> transmitPower</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Radios数组之一，WiFi发射功率级别（百分比）</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> channel</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Radios数组之一，当前工作信道号,若存在多个信道，可用“,”逗号分隔，例如：“1,6”</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> bandwidth</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">当前Wi-Fi频宽，采用枚举取值： 0：自动频宽 1：20MHz 2：40MHz 3：80MHz 4：160MHz 5：80+80MHz 说明：对于2.4G频段，自动频宽功能为20/40MHz频宽自适应；对于5G频段，自动频宽功能对应为20/40/80/160MHz频宽自适应</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-42">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31509u914du7f6ewps0a3ca20id3d31509u914du7f6ewps3e203ca3e">3.15	配置wps
+<a id=3.15	配置wps> </a></h2>
+<p></p>
+<h3 id="-43">基本信息</h3>
+<p><strong>Path：</strong> /api/wps</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-44">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> radio</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Radios数组之一，频段，枚举取值： 2.4G 5G 5G-2 注：对于三频设备，5G表示5.8G频段，5G-2表示5.2G频段；双频设备忽略5G-2频段</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-45">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31609u914du7f6eu53ccu9891u5408u4e000a3ca20id3d31609u914du7f6eu53ccu9891u5408u4e003e203ca3e">3.16	配置双频合一
+<a id=3.16	配置双频合一> </a></h2>
+<p></p>
+<h3 id="-46">基本信息</h3>
+<p><strong>Path：</strong> /api/bandsteeringconfig</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-47">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> bandSteeringStatus</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">双频合一开关： 0：关闭 1：打开</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接收信号强度阈值，当2.4G频段检测到某一下挂STA接收到的信号强度高于此阈值，将当前双频STA切换至5G频段。单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold5G</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">G接收信号强度阈值，当双频客户端首次连接或者当前工作在5G频段时，检测到某一下挂双频STA接收到的信号强度低于此阈值将下挂双频客户端切换至2.4G频段 单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-48">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31709u83b7u53d6u53ccu9891u5408u4e00u914du7f6e0a3ca20id3d31709u83b7u53d6u53ccu9891u5408u4e00u914du7f6e3e203ca3e">3.17	获取双频合一配置
+<a id=3.17	获取双频合一配置> </a></h2>
+<p></p>
+<h3 id="-49">基本信息</h3>
+<p><strong>Path：</strong> /api/bandsteeringconfig</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-50">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> bandSteeringStatus</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">双频合一开关： 0：关闭 1：打开</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接收信号强度阈值，当2.4G频段检测到某一下挂STA接收到的信号强度高于此阈值，将当前双频STA切换至5G频段。单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold5G</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">G接收信号强度阈值，当双频客户端首次连接或者当前工作在5G频段时，检测到某一下挂双频STA接收到的信号强度低于此阈值将下挂双频客户端切换至2.4G频段 单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-51">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> bandSteeringStatus</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">双频合一开关： 0：关闭 1：打开</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rssiThreshold</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接收信号强度阈值，当2.4G频段检测到某一下挂STA接收到的信号强度高于此阈值，将当前双频STA切换至5G频段。单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rssiThreshold5G</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">5G接收信号强度阈值，当双频客户端首次连接或者当前工作在5G频段时，检测到某一下挂双频STA接收到的信号强度低于此阈值将下挂双频客户端切换至2.4G频段 单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31809u83b7u53d6u6240u6709u5b9au65f6u5668u4efbu52a1u914du7f6eu4fe1u606f0a3ca20id3d31809u83b7u53d6u6240u6709u5b9au65f6u5668u4efbu52a1u914du7f6eu4fe1u606f3e203ca3e">3.18	获取所有定时器任务配置信息
+<a id=3.18	获取所有定时器任务配置信息> </a></h2>
+<p></p>
+<h3 id="-52">基本信息</h3>
+<p><strong>Path：</strong> /api/getalltimedtask</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-53">请求参数</h3>
+<h3 id="-54">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应数据</span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> tasks</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">[{以下字段组成的json},…]</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> taskId</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">任务Id, 值为0 时为新增任务，ahsapd自己生成新的非0 taskId值</span></td><td key=5></td></tr><tr key=0-2-0-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> taskName</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">任务名称</span></td><td key=5></td></tr><tr key=0-2-0-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> timeOffset</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">执行时间偏移量（执行任务的时间点与当天凌晨0点的时间差，以秒为单位）</span></td><td key=5></td></tr><tr key=0-2-0-3><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> week</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">使用int值二进制位的低7位代表星期，由高到低位依次代表星期六五四三二一日。如7(00000111B)表示周二，周一和周日。若仅需单次执行，值为0。</span></td><td key=5></td></tr><tr key=0-2-0-4><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> enable</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">任务是否启用0：不启用， 1：启用</span></td><td key=5></td></tr><tr key=0-2-0-5><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> action</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">任务指令，可能取值如下： 1: ToReboot（重启） 2: ToSetHealthMode（健康模式，定时开、关Wifi，（健康模式，定时开、关Wifi，在TimeOffset对应的时间关闭指定index的Wifi，在TimeOffset2对应的时间开启它。当TimeOffset2小于TimeOffset时，TimeOffset2代表相对于第二天0点的时间偏移量）</span></td><td key=5></td></tr><tr key=0-2-0-6><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> timeOffset2</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">仅当Action为ToSetHealthMode时，才携带该字段, 执行时间偏移量（执行任务的时间点与当天凌晨0点的时间差，以秒为单位）</span></td><td key=5></td></tr><tr key=0-2-0-7><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> index</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">仅当Action为ToSetHealthMode时，才携带该字段 ，Wifi通道。2.4G用1-4，5G用5-8，0表示所有Wifi通道</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="31909u6dfbu52a0u548cu66f4u65b0u5b9au65f6u4efbu52a10a3ca20id3d31909u6dfbu52a0u548cu66f4u65b0u5b9au65f6u4efbu52a13e203ca3e">3.19	添加和更新定时任务
+<a id=3.19	添加和更新定时任务> </a></h2>
+<p></p>
+<h3 id="-55">基本信息</h3>
+<p><strong>Path：</strong> /api/addtimedtask</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-56">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> tasks</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> taskId</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">任务Id, 值为0 时为新增任务，ahsapd自己生成新的非0 taskId值</span></td><td key=5></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> timeOffset</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">执行时间偏移量（执行任务的时间点与当天凌晨0点的时间差，以秒为单位）</span></td><td key=5></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> week</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-0-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> enable</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-0-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> action</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-0-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> timeOffset2</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-0-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> index</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-0-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> taskName</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-57">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="32009u5220u9664u5b9au65f6u4efbu52a10a3ca20id3d32009u5220u9664u5b9au65f6u4efbu52a13e203ca3e">3.20	删除定时任务
+<a id=3.20	删除定时任务> </a></h2>
+<p></p>
+<h3 id="-58">基本信息</h3>
+<p><strong>Path：</strong> /api/deletetimedtask</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-59">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> taskId</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">任务Id, 值为0 时为新增任务，ahsapd自己生成新的非0 taskId值</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-60">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="32109u8bbeu7f6eu9ed1u767du540du53550a3ca20id3d32109u8bbeu7f6eu9ed1u767du540du53553e203ca3e">3.21	设置黑白名单
+<a id=3.21	设置黑白名单> </a></h2>
+<p></p>
+<h3 id="-61">基本信息</h3>
+<p><strong>Path：</strong> /api/macfilter</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-62">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> macFilterEnable</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否使能MAC地址过滤；1为过滤；0为不过滤</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> macFilterPolicy</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">MAC地址过滤策略；0为黑名单；1为白名单</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> macFilterEntries</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">黑白名单信息：包含MAC地址及设备名，最多支持32组</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> macAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备的HostName</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> hostName</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备MAC地址</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-63">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="32209u83b7u53d6u9ed1u767du540du53550a3ca20id3d32209u83b7u53d6u9ed1u767du540du53553e203ca3e">3.22	获取黑白名单
+<a id=3.22	获取黑白名单> </a></h2>
+<p></p>
+<h3 id="-64">基本信息</h3>
+<p><strong>Path：</strong> /api/macfilter</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-65">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> bandSteeringStatus</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">双频合一开关： 0：关闭 1：打开</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接收信号强度阈值，当2.4G频段检测到某一下挂STA接收到的信号强度高于此阈值，将当前双频STA切换至5G频段。单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold5G</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">G接收信号强度阈值，当双频客户端首次连接或者当前工作在5G频段时，检测到某一下挂双频STA接收到的信号强度低于此阈值将下挂双频客户端切换至2.4G频段 单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-66">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> macFilterEnable</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否使能MAC地址过滤；1为过滤；0为不过滤</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> macFilterPolicy</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">MAC地址过滤策略；0为黑名单；1为白名单</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> macFilterEntries</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">黑白名单信息：包含MAC地址及设备名（一组最长为64字节），以“/”隔开；两组信息之间以逗号分开，最多支持32组。示例： 001111334455/pro,80717a33ccf3/android</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-2-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> hostName</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备的HostNam</span></td><td key=5></td></tr><tr key=0-2-2-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> macAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备MAC地址</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="32309u914du7f6eu6570u636eu4fddu5b580a3ca20id3d32309u914du7f6eu6570u636eu4fddu5b583e203ca3e">3.23	配置数据保存
+<a id=3.23	配置数据保存> </a></h2>
+<p></p>
+<h3 id="-67">基本信息</h3>
+<p><strong>Path：</strong> /api/cfgaddItem</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-68">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> item</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">配置项名称</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> value</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">配置项的值</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-69">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="32409u914du7f6eu6570u636eu83b7u53d60a3ca20id3d32409u914du7f6eu6570u636eu83b7u53d63e203ca3e">3.24	配置数据获取
+<a id=3.24	配置数据获取> </a></h2>
+<p></p>
+<h3 id="-70">基本信息</h3>
+<p><strong>Path：</strong> /api/cfggetItem</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-71">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> item</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">配置项名称</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-72">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> item</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">配置项名称</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> value</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">配置项的值</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> requestDeviceIp</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">请求设备的IP</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="32509u914du7f6eu6570u636eu5220u96640a3ca20id3d32509u914du7f6eu6570u636eu5220u96643e203ca3e">3.25	配置数据删除
+<a id=3.25	配置数据删除> </a></h2>
+<p></p>
+<h3 id="-73">基本信息</h3>
+<p><strong>Path：</strong> /api/cfgdelItem</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-74">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> item</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">配置项名称</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-75">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="32809lanu4fa7u5730u5740u4fe1u606fu83b7u53d60a3ca20id3d32809lanu4fa7u5730u5740u4fe1u606fu83b7u53d63e203ca3e">3.28	Lan侧地址信息获取
+<a id=3.28	Lan侧地址信息获取> </a></h2>
+<p></p>
+<h3 id="-76">基本信息</h3>
+<p><strong>Path：</strong> /api/lanaddresscfg</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-77">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> bandSteeringStatus</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">双频合一开关： 0：关闭 1：打开</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接收信号强度阈值，当2.4G频段检测到某一下挂STA接收到的信号强度高于此阈值，将当前双频STA切换至5G频段。单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold5G</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">G接收信号强度阈值，当双频客户端首次连接或者当前工作在5G频段时，检测到某一下挂双频STA接收到的信号强度低于此阈值将下挂双频客户端切换至2.4G频段 单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-78">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> lanIpAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Lan侧的Ip地址段</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> lanMask</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">子网掩码</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> lanAddressStart</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">lan侧dhcp起始分配地址</span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> lanAddressEnd</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">lan侧dhcp结束分配地址</span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> leaseTime</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">租约时间  0:无限期   单位秒</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="32909lanu4fa7u5730u5740u4fe1u606fu914du7f6e0a3ca20id3d32909lanu4fa7u5730u5740u4fe1u606fu914du7f6e3e203ca3e">3.29	Lan侧地址信息配置
+<a id=3.29	Lan侧地址信息配置> </a></h2>
+<p></p>
+<h3 id="-79">基本信息</h3>
+<p><strong>Path：</strong> /api/lanaddresscfg</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-80">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lanIpAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Lan侧的Ip地址段</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lanMask</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">子网掩码</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lanAddressStart</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">lan侧dhcp起始分配地址</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lanAddressEnd</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">lan侧dhcp结束分配地址</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> leaseTime</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">租约时间  0:无限期   单位秒</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-81">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="33009lanu4fa7u7ed1u5b9au8bbeu5907u72b6u6001u67e5u8be20a3ca20id3d33009lanu4fa7u7ed1u5b9au8bbeu5907u72b6u6001u67e5u8be23e203ca3e">3.30	Lan侧绑定设备状态查询
+<a id=3.30	Lan侧绑定设备状态查询> </a></h2>
+<p></p>
+<h3 id="-82">基本信息</h3>
+<p><strong>Path：</strong> /api/lanaddressbinding</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-83">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> bandSteeringStatus</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">双频合一开关： 0：关闭 1：打开</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接收信号强度阈值，当2.4G频段检测到某一下挂STA接收到的信号强度高于此阈值，将当前双频STA切换至5G频段。单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rssiThreshold5G</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">G接收信号强度阈值，当双频客户端首次连接或者当前工作在5G频段时，检测到某一下挂双频STA接收到的信号强度低于此阈值将下挂双频客户端切换至2.4G频段 单位：dbm. 取值范围（-100~0）</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-84">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> staDevices</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">配置绑定的设备信息数组，该字段在存在绑定设备时必选</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0-0><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> ipAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备的IPAddress，该字段在存在绑定设备时必选</span></td><td key=5></td></tr><tr key=0-2-0-1><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> hostName</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备的HostName，该字段在存在绑定设备时必选</span></td><td key=5></td></tr><tr key=0-2-0-2><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> macAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备MAC地址，格式为不带冒号且大写； 该字段在存在绑定设备时必选</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="33109lanu4fa7u7ed1u5b9au8bbeu5907u6dfbu52a0u548cu4feeu65390a3ca20id3d33109lanu4fa7u7ed1u5b9au8bbeu5907u6dfbu52a0u548cu4feeu65393e203ca3e">3.31	Lan侧绑定设备添加和修改
+<a id=3.31	Lan侧绑定设备添加和修改> </a></h2>
+<p></p>
+<h3 id="-85">基本信息</h3>
+<p><strong>Path：</strong> /api/lanaddressbindingadd</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-86">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> staDevices</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备的IPAddress</span></td><td key=5></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> hostName</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备的HostName </span></td><td key=5></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> macAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定设备MAC地址，格式为不带冒号且大写；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-87">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="33209lanu4fa7u7ed1u5b9au8bbeu5907u5220u96640a3ca20id3d33209lanu4fa7u7ed1u5b9au8bbeu5907u5220u96643e203ca3e">3.32	Lan侧绑定设备删除
+<a id=3.32	Lan侧绑定设备删除> </a></h2>
+<p></p>
+<h3 id="-88">基本信息</h3>
+<p><strong>Path：</strong> /api/lanaddressbindingdel</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-89">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> staDevices</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ipAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> macAddress</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-90">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCode</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">响应码， 0为成功，其他见附录A</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> respCont</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">接口调用失败时的返回值；</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="33320u7ec4u7f51u8bbeu5907u5468u8fb9wifiu4fe1u606f0a3ca20id3d33320u7ec4u7f51u8bbeu5907u5468u8fb9wifiu4fe1u606f3e203ca3e">3.33 组网设备周边WIFI信息
+<a id=3.33 组网设备周边WIFI信息> </a></h2>
+<p></p>
+<h3 id="-91">基本信息</h3>
+<p><strong>Path：</strong> /api/getWlanNeighborInfo</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-92">请求参数</h3>
+<h3 id="-93">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> number</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">周边WIFI数量，当值为0时，WIFI信息数组为空</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> radios</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">周边WIFI信息数组，周边WIFI数量为非零时必选</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> radio</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">频段：2.4G、5G；该字段在周边WIFI数量非零时必选</span></td><td key=5></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ssid</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">周边wifi的SSID名称；该字段在周边WIFI数量非零时必选</span></td><td key=5></td></tr><tr key=0-1-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> macAddress</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">周边WiFi 的MAC地址，格式为不带冒号并且大写； 该字段在周边WIFI数量非零时必选</span></td><td key=5></td></tr><tr key=0-1-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> channel</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">周边WiFi信道, 如存在多信道，引用“,”逗号分隔，例：“1 ,6”； 该字段在周边WIFI数量非零时必选</span></td><td key=5></td></tr><tr key=0-1-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rssi</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">周边wifi的弱信号值；该字段在周边WIFI数量非零时必选</span></td><td key=5></td></tr><tr key=0-1-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> bandwidth</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">周边Wi-Fi频宽，采用枚举取值：周边Wi-Fi数量非零时必选； 1：20MHz 2：40MHz 3：80MHz 4：160MHz 5：80+80MHz</span></td><td key=5></td></tr><tr key=0-1-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> wifiStandard</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">周边Wi-Fi使用的无线标准，采用枚举取值：周边Wi-Fi数量非零时必选（取最高标准上报，低于802.11g的报0）； 0：其它 1：802.11g 2：802.11n 3：802.11ac 4：802.11ax</span></td><td key=5></td></tr><tr key=0-1-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> securityMode</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">认证加密模式，枚举取值： None WEP-64 WEP-128 WPA-Personal WPA2-Personal MIXED-WPAPSK2 WPA3-SAE MIXED-WPA2WPA3	</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+
+            <footer class="m-footer">
+              <p>Build by <a href="https://ymfe.org/">YMFE</a>.</p>
+            </footer>
+          </div>
+        </div>
+      </body>
+      </html>
+      

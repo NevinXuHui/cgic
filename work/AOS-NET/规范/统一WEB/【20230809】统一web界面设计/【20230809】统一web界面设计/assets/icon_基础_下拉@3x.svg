@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon_基础_下拉</title>
+    <g id="20230807" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="40-高级设置--DDNS-配置" transform="translate(-750.000000, -195.000000)">
+            <g id="编组-3" transform="translate(367.000000, 186.000000)">
+                <g id="默认-已输入" transform="translate(125.000000, 0.000000)">
+                    <g id="up" transform="translate(258.000000, 9.000000)">
+                        <rect id="矩形" fill="#000000" fill-rule="nonzero" opacity="0" x="0" y="0" width="14" height="14"></rect>
+                        <path d="M12.0314232,3.5 L11.0060325,3.5 C10.936306,3.5 10.870681,3.53417969 10.8296653,3.59023438 L6.94548566,8.94414063 L3.06130597,3.59023438 C3.02029035,3.53417969 2.95466535,3.5 2.88493878,3.5 L1.85954816,3.5 C1.77068097,3.5 1.71872785,3.60117188 1.77068097,3.67363281 L6.5913841,10.3195313 C6.7663841,10.5601563 7.12458722,10.5601563 7.29822003,10.3195313 L12.1189232,3.67363281 C12.1722435,3.60117187 12.1202903,3.5 12.0314232,3.5 Z" id="路径" fill="#BFBFBF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

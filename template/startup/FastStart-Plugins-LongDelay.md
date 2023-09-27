@@ -23,6 +23,6 @@ obsidian-booknote-plugin
 Obsidian-Agtable
 cmenu-plugin
 obsidian-gallery
-obsidian-weread-plugin
+//obsidian-weread-plugin
 obsidian-projects
 surfing

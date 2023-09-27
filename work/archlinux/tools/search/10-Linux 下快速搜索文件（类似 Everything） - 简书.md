@@ -1,7 +1,4 @@
 ---
-banner: "http://upload-images.jianshu.io/upload_images/137499-2dd6615aaba82316.png"
----
----
 url: https://www.jianshu.com/p/4a62c38bec7e
 title: Linux 下快速搜索文件（类似 Everything） - 简书
 date: 2023-04-25 10:09:34

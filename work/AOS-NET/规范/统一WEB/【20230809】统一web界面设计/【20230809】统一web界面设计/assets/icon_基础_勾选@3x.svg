@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon_基础_勾选</title>
+    <defs>
+        <polygon id="path-1" points="9.33945408 2.71671243 11.2505904 2.76600474 11.496106 12.2850114 5.55689667 12.1318265 5.50561788 10.1436714 9.57098257 10.2470072"></polygon>
+        <filter x="-16.7%" y="-10.5%" width="133.4%" height="120.9%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="-2" dy="0" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowInnerInner1" result="shadowMatrixInner1"></feColorMatrix>
+            <feOffset dx="0" dy="-2" in="SourceAlpha" result="shadowOffsetInner2"></feOffset>
+            <feComposite in="shadowOffsetInner2" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner2"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowInnerInner2" result="shadowMatrixInner2"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner2"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="20230807" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="27-设备管理-DNS配置" transform="translate(-519.000000, -217.000000)">
+            <g id="编组-2" transform="translate(519.000000, 214.000000)">
+                <g id="icon_基础_勾选" transform="translate(0.000000, 3.000000)">
+                    <rect id="ant-checkbox-inner" stroke="#1890FF" fill="#1890FF" x="0.5" y="0.5" width="15" height="15"></rect>
+                    <g id="ant-checkbox-inner" transform="translate(8.500862, 7.500862) rotate(45.000000) translate(-8.500862, -7.500862) " fill="black" fill-opacity="1">
+                        <use filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

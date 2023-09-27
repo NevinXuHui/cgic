@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"editor.selectionBackground": "#f54813",
+			"editor.selectionHighlightBackground": "#139bf5",
+			"statusBar.noFolderBackground": "#005f5f",
+			"statusBar.debuggingBackground": "#005f5f",
+			"statusBar.debuggingForeground": "#434C5E"
+		},
+		"files.exclude": {
+			"**.AppImage": true,
+			"**.zip": true,
+			"**/.obsidian*": true,
+			"**/*.docx": true,
+			"**/*.pdf": true,
+			"**/*.zip": true,
+			"obsidian@localrestapi": true
+		}
+	}
+}

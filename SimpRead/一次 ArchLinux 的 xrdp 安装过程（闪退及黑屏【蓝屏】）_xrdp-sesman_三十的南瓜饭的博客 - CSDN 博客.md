@@ -1,7 +1,4 @@
 ---
-banner: "https://images.unsplash.com/photo-1691962898718-4dfecbf3c0f2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0Njc1ODd8MHwxfHJhbmRvbXx8fHx8fHwxfHwxNjkyOTM5ODIxfA&ixlib=rb-4.0.3&q=85&fit=crop&w=1882&max-h=540"
----
----
 url: https://blog.csdn.net/qq_43586061/article/details/119813085
 title: 一次 ArchLinux 的 xrdp 安装过程（闪退及黑屏【蓝屏】）_xrdp-sesman_三十的南瓜饭的博客 - CSDN 博客
 date: 2023-08-25 13:03:42
