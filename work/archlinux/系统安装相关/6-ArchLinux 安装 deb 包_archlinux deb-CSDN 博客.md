@@ -19,7 +19,7 @@ banner_icon: 🔖
 4.  sudo pacman -U 转换后的包名
 
 ```
-yay -s debtap
+yay -S debtap
 sudo debtap -u
 debtap .deb包名
 sudo pacman -U 	转换后的包名
